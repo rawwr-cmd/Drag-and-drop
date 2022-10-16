@@ -107,14 +107,33 @@ class ProjectItem extends Component {
         this.configure();
         this.renderContent();
     }
-    configure() { }
+    get persons() {
+        if (this.project.people === 1) {
+            return "1 person";
+        }
+        else {
+            return this.project.people + " persons";
+        }
+    }
+    dragStartHandler(event) {
+        console.log(event);
+    }
+    dragEndHandler(event) {
+        console.log("DragEnd");
+    }
+    configure() {
+        this.element.addEventListener("dragstart", this.dragStartHandler);
+        this.element.addEventListener("dragend", this.dragEndHandler);
+    }
     renderContent() {
         this.element.querySelector("h2").textContent = this.project.title;
-        this.element.querySelector("h3").textContent =
-            this.project.people.toString() + " assigned";
+        this.element.querySelector("h3").textContent = this.persons + " assigned";
         this.element.querySelector("p").textContent = this.project.description;
     }
 }
+__decorate([
+    Autobind
+], ProjectItem.prototype, "dragStartHandler", null);
 class projectList extends Component {
     constructor(type) {
         super("project-list", "app", false, `${type}-projects`);
@@ -146,7 +165,6 @@ class projectList extends Component {
         listEl.innerHTML = "";
         for (const prjItem of this.assignedProjects) {
             new ProjectItem(this.element.querySelector("ul").id, prjItem);
-            console.log(this.element);
         }
     }
 }
