@@ -165,7 +165,7 @@ abstract class Component<T extends HTMLElement, U extends HTMLElement> {
       true
     );
 
-    this.element = importedNode.firstElementChild as U; //section
+    this.element = importedNode.firstElementChild as U; //section, li
 
     if (newElementId) {
       this.element.id = newElementId;
@@ -234,7 +234,10 @@ class ProjectItem
 }
 
 //project list
-class projectList extends Component<HTMLDivElement, HTMLElement> {
+class projectList
+  extends Component<HTMLDivElement, HTMLElement>
+  implements DragTarget
+{
   assignedProjects: Project[];
 
   constructor(private type: "active" | "finished") {
@@ -260,7 +263,25 @@ class projectList extends Component<HTMLDivElement, HTMLElement> {
     this.renderContent();
   }
 
+  @Autobind
+  dragOverHandler(event: DragEvent) {
+    const listEl = this.element.querySelector("ul")!;
+    listEl.classList.add("droppable");
+  }
+
+  dropHandler(_: DragEvent) {}
+
+  @Autobind
+  dragLeaveHandler(_: DragEvent) {
+    const listEl = this.element.querySelector("ul")!;
+    listEl.classList.remove("droppable");
+  }
+
   configure() {
+    // console.log(this.element);
+    this.element.addEventListener("dragover", this.dragOverHandler);
+    this.element.addEventListener("dragleave", this.dragLeaveHandler);
+    this.element.addEventListener("drop", this.dropHandler);
     projectState.addListener((projects: Project[]) => {
       // this.assignedProjects = projects;
       // console.log(projects);
