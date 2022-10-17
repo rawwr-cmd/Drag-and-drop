@@ -1,3 +1,3 @@
 # Drag-and-drop
 
-## PROJECT BASED ON TYPESCRIPT("target": "ES2020")
+## PROJECT BUILT AND POWERED BY TYPESCRIPT("target": "ES2020")
