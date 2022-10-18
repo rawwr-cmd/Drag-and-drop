@@ -1,3 +1,4 @@
+// Project Type(because we want to instantiate it)
 namespace App {
   export enum ProjectType {
     Active,
