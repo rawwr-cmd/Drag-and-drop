@@ -1,10 +1,11 @@
-import { ProjectInput } from "./components/project-input.js";
-import { projectList } from "./components/project-list.js";
+import { ProjectInput } from "./components/project-input";
+import { projectList } from "./components/project-list";
 
 new ProjectInput();
 new projectList("active");
 new projectList("finished");
 
+console.log("hey there!!");
 // <!-- beforebegin -->
 // <p>
 //   <!-- afterbegin -->

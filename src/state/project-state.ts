@@ -1,4 +1,4 @@
-import { Project, ProjectType } from "../models/project-model.js";
+import { Project, ProjectType } from "../models/project-model";
 //project management class
 type Listener<T> = (items: T[]) => void;
 
